@@ -1,0 +1,13 @@
+{
+  "rectangle": {
+    "width": 3,
+    "height": 3
+  },
+  "obstacles": [
+    {
+      "x": 1,
+      "y": 1
+    }
+  ]
+}
+
