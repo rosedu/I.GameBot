@@ -40,7 +40,7 @@ def write_progress_log_to_disk(
       progress_log
     )
   begin
-    output_file = '/tmp/elevators_progress_log_' +
+    output_file = '/tmp/snakemaze_progress_log_' +
                   progress_log['contestant'] +
                   '.json'
     f = open(output_file, 'w')
