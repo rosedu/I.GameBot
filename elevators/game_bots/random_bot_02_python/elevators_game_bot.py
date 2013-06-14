@@ -141,11 +141,16 @@ try:
                 break
 
             try:
-                elevators = \
+                raw_elevators = \
                     parsed_request['elevators']
             except:
                 print 'ERROR: I could not locate ELEVATORS.'
                 break
+
+            elevators = {
+                int(elevator_id_str): elevator_hash
+                for elevator_id_str, elevator_hash in raw_elevators
+            }
 
         if request == 'set_standby_locations':
 

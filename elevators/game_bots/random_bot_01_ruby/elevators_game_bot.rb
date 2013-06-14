@@ -22,7 +22,7 @@ begin
   verify_that_argument_is_a_named_pipe(output_named_pipe)
 
   loop do
-    $stderr.puts 'INFO: Waiting for game engine to send a request...'
+    $stderr.puts 'INFO: Accepting requests ...'
 
     raw_request = read_raw_json(input_named_pipe)
 
@@ -63,11 +63,18 @@ begin
       end
 
       begin
-        elevators = parsed_request['elevators']
+        raw_elevators = parsed_request['elevators']
       rescue
         $stderr.puts "ERROR: I could not locate ELEVATORS."
         exit
       end
+
+      elevators = 
+        Hash[
+          raw_elevators.map do |elevator_id_str, elevator_hash|
+            [elevator_id_str.to_i, elevator_hash]
+          end
+        ]
     end
 
     case request

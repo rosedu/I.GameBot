@@ -26,7 +26,7 @@ def embark_passengers_and_set_destinations(
   passengers_per_floor = {}
 
   elevators.keys.each do |elevator_id|
-    passengers_per_elevator[elevator_id.to_i] = []
+    passengers_per_elevator[elevator_id] = []
   end
 
   (0..number_of_floors-1).to_a.each do |floor_id|
@@ -51,7 +51,7 @@ def embark_passengers_and_set_destinations(
     end
 
   elevators_not_in_motion.each do |elevator_id, elevator_hash|
-    passenger_list = passengers_per_elevator[elevator_id.to_i]
+    passenger_list = passengers_per_elevator[elevator_id]
     if !passenger_list.empty?
       passenger_who_is_aboard = passenger_list[0]
 

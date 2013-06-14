@@ -6,7 +6,7 @@ def set_standby_locations(
 
     response = {}
 
-    for elevator_id in range(0,number_of_elevators):
+    for elevator_id in range(0, number_of_elevators):
 
         response[elevator_id] = {'set_standby_location': 0}
 
@@ -27,7 +27,7 @@ def embark_passengers_and_set_destinations(
 
     for elevator_id in elevators.keys():
 
-        passengers_per_elevator[int(elevator_id)] = []
+        passengers_per_elevator[elevator_id] = []
 
     for floor_id in range(0, number_of_floors):
 
@@ -56,7 +56,7 @@ def embark_passengers_and_set_destinations(
     for elevator_id, elevator_hash in elevators_not_in_motion.items():
 
         passenger_list = \
-            passengers_per_elevator[int(elevator_id)]
+            passengers_per_elevator[elevator_id]
 
         if len(passenger_list) > 0:
 
