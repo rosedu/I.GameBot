@@ -76,7 +76,6 @@ def embark_passengers_and_set_destinations(
 
         elevator_is_at_floor = elevator_hash['location']['at_floor']
 
-
         if len(passengers_per_floor[elevator_is_at_floor]) > 0:
             passenger_to_embark = passengers_per_floor[elevator_is_at_floor][0]
 
@@ -98,7 +97,7 @@ def embark_passengers_and_set_destinations(
 
     for floor_id, passenger_list in passengers_per_floor.items():
 
-        if len(passenger_list):
+        if len(passenger_list) > 0:
 
             response[elevator_id]['set_destination'] = floor_id
 
