@@ -173,5 +173,8 @@ def start_game
     $stderr.puts e.class::MESSAGE
   end
   puts progress_log.to_json
+  puts
+  puts "Overall score: #{progress_log['overall_score']}"
+  puts
 end
 
