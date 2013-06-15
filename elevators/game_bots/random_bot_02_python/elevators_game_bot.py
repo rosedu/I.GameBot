@@ -149,7 +149,7 @@ try:
 
             elevators = {
                 int(elevator_id_str): elevator_hash
-                for elevator_id_str, elevator_hash in raw_elevators
+                for elevator_id_str, elevator_hash in raw_elevators.items()
             }
 
         if request == 'set_standby_locations':
