@@ -78,6 +78,7 @@ Overall score O : <another_number>
 cd ~/aichallenge
 git add .
 git commit -m "My copy of the starter pack"
+git pull
 git push
 ```
 
