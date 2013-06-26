@@ -6,7 +6,7 @@ The goal is not necessarily to win the game (although that helps). The goal is t
 
 This is how points are scored:
 - The game bot that wins a game scores 10 points
-- The game bot that makes the opening move of a game has the option to immediately score 3 points provided it places its `X` token on one of the edges
+- The game bot that makes the opening move of a game has the option to immediately score 3 points, provided it places its `X` token on one of the edge middles (more specifically, at either one of the board positions `'a2'`,`'b1'`,`'b3'`,`'c2'`)
 - A game bot that successfully defends itself against a direct attack scores 1 point
 - A game bot that complies with all the rules, only makes legal moves, plays fair and doesn't crash, scores 3 bonus points at the end of the game
 
@@ -90,6 +90,8 @@ The `play_turn` function takes the three arguments listed below, and returns a t
 - `player_role` - with two possible values: `x` or `zero`
 - `owned_by_x` - a list of tokens owned by player 1
 - `owned_by_zero` - a list of tokens owned by player 2
+
+The token (return value) needs to be either one of the board positions `'a1'`, `'a2'`, `'a3'`, `'b1'`, `'b2'`, `'b3'`, `'c1'`, `'c2'`, `'c3'`, provided that position is empty.
 
 The starter pack's default `play_turn` function computes a list of all empty board squares, picks one at random, and returns it.
 
