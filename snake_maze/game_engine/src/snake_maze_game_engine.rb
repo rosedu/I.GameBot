@@ -1,6 +1,7 @@
 require 'json'
 require './src/exceptions.rb'
 require './src/input_verifications.rb'
+require './src/json_handling_and_file_io.rb'
 
 DEBUG = true
 
@@ -77,55 +78,24 @@ def game_state_after_building_snake(snake, topology)
   game_state
 end
 
-def send_raw_json_to_player(
-      output_of_game_engine_input_of_player,
-      raw_json
-    )
-  begin
-    f = open(output_of_game_engine_input_of_player, 'w')
-    f.puts raw_json
-    f.close
-  rescue
-    $stderr.puts 'FILE: ' + output_of_game_engine_input_of_player if DEBUG
-    raise UnexpectedFileAccessError
-  end
-end
-
-def read_raw_json(file_handle)
-  begin
-    f = open(file_handle, 'r')
-    raw_json = f.readlines.join
-    f.close
-  rescue
-    $stderr.puts 'FILE: ' + file_handle if DEBUG
-    raise UnexpectedFileAccessError
-  end
-
-  raw_json
-end
-
-def parse_raw_json(raw_json)
-  begin
-    parsed_json = JSON.parse(raw_json)
-  rescue
-    $stderr.puts 'RESPONSE: ' + raw_json if DEBUG
-    raise ResponseNotInJSONFormatError
-  end
-
-  parsed_json
-end
-
 def start_game
+  output_of_game_engine_input_of_player = ARGV.shift
+  output_of_player_input_of_game_engine = ARGV.shift
+  screen_name_of_contestant = ARGV.shift
+
+  topology_json_hash = {}
+  ARGV.each do |topology_json_file|
+    topology_json_hash[topology_json_file] = :dummy
+  end
+
+  progress_log = {
+    'contestant' => screen_name_of_contestant,
+    'topologies_processed' => 0,
+    'per_topology_final_game_state' => {},
+    'overall_score' => 0
+  }
+
   begin
-    output_of_game_engine_input_of_player = ARGV.shift
-    output_of_player_input_of_game_engine = ARGV.shift
-    screen_name_of_contestant = ARGV.shift
-
-    topology_json_hash = {}
-    ARGV.each do |topology_json_file|
-      topology_json_hash[topology_json_file] = :dummy
-    end
-
     verify_that_argument_is_a_named_pipe(
       output_of_game_engine_input_of_player
     )
@@ -154,7 +124,6 @@ def start_game
       topology_json_hash[topology_json_file] = parsed_topology_json
     end
 
-    progress_log = {}
     topology_json_hash.each do |topology_json_file, parsed_topology_json|
       request = parsed_topology_json.dup
       request['request'] = 'play_your_turn'
@@ -189,7 +158,13 @@ def start_game
                      parsed_topology_json
                    )
 
-      progress_log[topology_json_file] = game_state
+      progress_log['topologies_processed'] += 1
+      progress_log['per_topology_final_game_state'][topology_json_file] =
+        game_state
+      progress_log['overall_score'] += game_state[:score]
+      write_progress_log_to_disk(
+        progress_log
+      )
 
       $stderr.puts "INFO: Based on the snake data I received from the game bot, I have computed the following game state:" if DEBUG
       $stderr.puts game_state.inspect if DEBUG
@@ -198,5 +173,8 @@ def start_game
     $stderr.puts e.class::MESSAGE
   end
   puts progress_log.to_json
+  puts
+  puts "Overall score: #{progress_log['overall_score']}"
+  puts
 end
 
