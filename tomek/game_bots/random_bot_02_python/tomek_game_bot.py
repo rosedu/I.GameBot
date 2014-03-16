@@ -97,6 +97,8 @@ try:
 
         raw_request = read_raw_json(input_named_pipe)
 
+        print raw_request
+
         parsed_request = parse_raw_json(raw_request)
 
         try:
