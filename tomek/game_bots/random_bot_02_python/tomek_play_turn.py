@@ -6,9 +6,9 @@ def play_turn(
         player_role,
         owned_by_x,
         owned_by_zero,
-        owned_by_t
+        occupied_by_t
     ):
 
-    available_squares = list( set(BOARD) - set(owned_by_x) - set(owned_by_zero) -owned_by_t)
+    available_squares = list( set(BOARD) - set(owned_by_x) - set(owned_by_zero) - set([occupied_by_t]))
 
     return random.choice(available_squares)
