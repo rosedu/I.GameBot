@@ -140,7 +140,7 @@ try:
                 print 'ERROR: I could not locate a key-value pair for OWNED_BY_ZERO.'
                 continue
             try:
-                occupied_by_t = parsed_request['occupied_by_t']
+                occupied_by_t = parsed_request['occupied_by_t'].encode('ascii')
             except:
                 print 'ERROR: I could not locate a key-value pair for OCCUPIED_BY_T.'
                 continue
