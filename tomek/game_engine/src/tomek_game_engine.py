@@ -65,8 +65,9 @@ def compute_points_scored(
     ]
 
     if turn >= 4:
-
+        
         empty_set = set([])
+        
         set_with_only_token_placed = set([token_placed])
         set_owned_by_x    = set(game_state['owned_by_x'])
         set_owned_by_zero = set(game_state['owned_by_zero'])
@@ -233,7 +234,7 @@ def start_game():
         game_state = {
             'owned_by_x':    [],
             'owned_by_zero': [],
-            'occupied_by_t': 'a1'   
+            'occupied_by_t': occupied_by_t   
         }
         progress_log['occupied_by_t'] = game_state['occupied_by_t']
         last_token_placed = ''
