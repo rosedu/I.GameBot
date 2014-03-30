@@ -23,7 +23,7 @@ WINNING_COMBINATIONS = {
 
 WCOMB_FOR_TOKEN = {
     'a1': ['a1a2a3a4', 'a1b1c1d1', 'a1b2c3d4'],
-    'a2': ['a1a2a3a4', 'a2b2c2d4'],
+    'a2': ['a1a2a3a4', 'a2b2c2d2'],
     'a3': ['a1a2a3a4', 'a3b3c3d3'],
     'a4': ['a1a2a3a4', 'a4b4c4d4', 'a4b3c2d1'],
     'b1': ['b1b2b3b4', 'a1b1c1d1'],

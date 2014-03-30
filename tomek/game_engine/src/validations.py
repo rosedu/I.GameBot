@@ -13,9 +13,26 @@ def verify_game_state_consistency(
         game_state,
         who_moves_next
     ):
+    max_size_of_game_state=3
+   
+    if type(game_state) is not dict:
+        raise GameStateIsNotAHashError
+
+    if len(game_state)!=max_size_of_game_state:
+        raise GameStateLengthError
 
     size_of_owned_by_x    = len( game_state['owned_by_x'] )
     size_of_owned_by_zero = len( game_state['owned_by_zero'] )
+
+
+    if 'owned_by_x' not in game_state:
+        raise  KeyOwnedbyXNotInGameStateError
+
+    if 'owned_by_zero' not in game_state:
+        raise  KeyOwnedbyZeroNotInGameStateError    
+
+    if 'occupied_by_t' not in game_state:
+        raise  KeyOcupiedByTNotInGameStateError
 
     if size_of_owned_by_x < size_of_owned_by_zero:
         raise GameStateInconsistencyError
@@ -68,7 +85,7 @@ def verify_turn_response(
     if 'turn' not in parsed_response:
         raise NoSuchKeyTurnError
 
-    occupied_cells = game_state['owned_by_x'] + game_state['owned_by_zero'] + game_state['occupied_by_t']
+    occupied_cells = game_state['owned_by_x'] + game_state['owned_by_zero'] + [game_state['occupied_by_t']]
 
     token_placed = parsed_response['turn']
 

@@ -53,4 +53,22 @@ class NoSuchKeyTurnError(GameEngineError):
     def __str__(self):
         return 'ERROR: No such key: turn.'
 
+class GameStateIsNotAHashError(GameEngineError):
+    def __str__(self):
+        return 'ERROR: GameState is not a dictionary.'
 
+class GameStateLengthError(GameEngineError):
+    def __str__(self):
+        return 'ERROR: Wrong number of GameState entries.'
+
+class KeyOwnedbyXNotInGameStateError(GameEngineError):
+    def __str__(self):
+        return 'ERROR: No key owned_by_x in dictionary.'
+
+class KeyOwnedbyZeroNotInGameStateError(GameEngineError):
+    def __str__(self):
+        return 'ERROR: No key owned_by_zero in dictionary.'
+
+class KeyOcupiedByTNotInGameStateError(GameEngineError):
+    def __str__(self):
+        return 'ERROR: No key ocupied_by_t in dictionary.'

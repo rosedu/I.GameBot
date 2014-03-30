@@ -248,7 +248,7 @@ def start_game():
         #rulare in bucla pe toate valorile lui t?
 
          
-		occupied_by_t = 'a1'
+        occupied_by_t = 'a1'
         game_state = {
             'owned_by_x':    [],
             'owned_by_zero': [],
