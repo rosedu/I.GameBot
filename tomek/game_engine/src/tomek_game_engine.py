@@ -25,6 +25,7 @@ def sync_overall_scores(progress_log):
 
     return progress_log
 
+
 def incorporate_points_scored(
         progress_log,
         points_scored_by_x,
@@ -224,17 +225,17 @@ def start_game():
 
         who_moves_next = 1
 
-        occupied_by_t = "a1"
+     
         #valori deterministe pentru t
         #ocuparea casutei pentru t
         #rulare in bucla pe toate valorile lui t?
-       
-         
 
+         
+		occupied_by_t = "a1"
         game_state = {
             'owned_by_x':    [],
             'owned_by_zero': [],
-            'occupied_by_t': occupied_by_t   
+            'occupied_by_t': 'a1' 
         }
         progress_log['occupied_by_t'] = game_state['occupied_by_t']
         last_token_placed = ''
