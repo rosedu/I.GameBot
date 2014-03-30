@@ -2,7 +2,7 @@ execfile('src/parameters.py')
 execfile('src/exceptions.py')
 execfile('src/validations.py')
 execfile('src/json_handling_and_file_io.py')
-
+import itertools
 DEBUG = True
 
 class PlayerInfo:
@@ -40,6 +40,13 @@ def incorporate_points_scored(
 
     return progress_log
 
+
+def is_aligned_wT(game_state, token_placed):
+    poss_advantage = WCOMB_FOR_TOKEN[game_state['occupied_by_t']]
+    my_poss_advantage = [WINNING_COMBINATIONS[x] for x in poss_advantage]
+    list_advantages = list(itertools.chain(*my_poss_advantage))
+    return token_placed in list_advantages
+
 def compute_points_scored(
         turn,
         game_state,
@@ -52,14 +59,17 @@ def compute_points_scored(
     points_scored_by_x    = 0
     points_scored_by_zero = 0
 
-    if turn == 1 and token_placed in ['a2','a3', 'b1', 'b4', 'c1', 'c4', 'd2', 'd4']:
+    bonus_token_placed = ['a2','a3', 'b1', 'b4', 'c1', 'c4', 'd2', 'd4']
+    
+
+    if turn == 1 and token_placed in bonus_token_placed and not is_aligned_wT(game_state, token_placed):
         points_scored_by_x = EDGE_TOKEN_POINTS
         return (
             return_code,
             points_scored_by_x,
             points_scored_by_zero
         )
-    if turn == 2 and token_placed in ['a2', 'a3', 'b1', 'b4', 'c1', 'c4', 'd2', 'd4']:
+    if turn == 2 and token_placed in bonus_token_placed and not is_aligned_wT(game_state, token_placed):
         points_scored_by_zero = EDGE_TOKEN_POINTS
         return (
             return_code,
