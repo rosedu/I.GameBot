@@ -82,7 +82,7 @@ def compute_points_scored(
         for aligned_squares in WCOMB_FOR_TOKEN[token_placed]
     ]
 
-    if turn >= 4:
+    if turn >= 5:
         
         empty_set = set([])
         
