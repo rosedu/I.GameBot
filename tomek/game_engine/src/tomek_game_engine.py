@@ -59,7 +59,7 @@ def compute_points_scored(
             points_scored_by_x,
             points_scored_by_zero
         )
-    if turn == 2 and token_placed in ['a2', 'a3', 'b1', 'b4', 'c1', 'c4', 'd2', 'd4']
+    if turn == 2 and token_placed in ['a2', 'a3', 'b1', 'b4', 'c1', 'c4', 'd2', 'd4']:
         points_scored_by_zero = EDGE_TOKEN_POINTS
         return (
             return_code,
