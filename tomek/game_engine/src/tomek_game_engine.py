@@ -238,11 +238,11 @@ def start_game():
         #rulare in bucla pe toate valorile lui t?
 
          
-		occupied_by_t = "a1"
+		occupied_by_t = 'a1'
         game_state = {
             'owned_by_x':    [],
             'owned_by_zero': [],
-            'occupied_by_t': 'a1' 
+            'occupied_by_t': occupied_by_t 
         }
         progress_log['occupied_by_t'] = game_state['occupied_by_t']
         last_token_placed = ''
