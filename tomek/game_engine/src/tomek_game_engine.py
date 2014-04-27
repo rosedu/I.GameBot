@@ -150,7 +150,7 @@ def compute_points_scored(
         points_scored_by_zero
     )
 
-def start_game():
+def start_game(game_number):
 
     verify_number_of_cmd_line_arguments( len(sys.argv) - 1 )
 
@@ -247,8 +247,8 @@ def start_game():
         #ocuparea casutei pentru t
         #rulare in bucla pe toate valorile lui t?
 
-         
-        occupied_by_t = 'a1'
+        t_pozitions = ['a1','a2','b2']
+        occupied_by_t = t_pozitions[game_number]
         game_state = {
             'owned_by_x':    [],
             'owned_by_zero': [],
@@ -363,13 +363,32 @@ def start_game():
     write_progress_log_to_disk(
         progress_log
     )
-
+    
+    print '================================================'
+    print 'Game number: ' + str(game_number + 1)
     print progress_log
     print
-    print 'Overall score X : ' + str(progress_log['overall_score_x'])
+    print 'Game ' + str(game_number + 1) + ' score  X : ' + str(progress_log['overall_score_x'])
     print
-    print 'Overall score O : ' + str(progress_log['overall_score_zero'])
+    print 'Game ' + str(game_number + 1) + ' score O : ' + str(progress_log['overall_score_zero'])
     print
 
-    return
+    return(progress_log['overall_score_x'], progress_log['overall_score_zero'])
 
+def start_match():
+    overall_score_x = 0
+    overall_score_zero = 0
+    for i in range(0,3):
+       crt_score_x, crt_score_zero = start_game(i)
+       overall_score_x += crt_score_x
+       overall_score_zero += crt_score_zero
+
+    print '================================================'
+    print 'Overall score X: ' +str(overall_score_x)
+    print 'Overall score zero: ' + str(overall_score_zero)
+    if overall_score_x > overall_score_zero:
+       print 'Match winner X'
+    elif overall_score_x < overall_score_zero:
+       print 'Match winner O'
+    else:
+       print 'Match ended in a tie'
