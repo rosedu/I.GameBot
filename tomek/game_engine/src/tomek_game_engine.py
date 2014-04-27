@@ -243,10 +243,6 @@ def start_game(game_number):
         who_moves_next = 1
 
      
-        #valori deterministe pentru t
-        #ocuparea casutei pentru t
-        #rulare in bucla pe toate valorile lui t?
-
         t_pozitions = ['a1','a2','b2']
         occupied_by_t = t_pozitions[game_number]
         game_state = {
@@ -339,7 +335,7 @@ def start_game(game_number):
             progress_log['bonus_points_for_zero'] = \
                 BONUS_POINTS - progress_log['bonus_points_for_zero']
 
-            if return_code == GAME_STOPS_NOW or turn == 9:
+            if return_code == GAME_STOPS_NOW or turn == 15:
                 progress_log['bonus_points_for_x']    = BONUS_POINTS
                 progress_log['bonus_points_for_zero'] = BONUS_POINTS
                 break
@@ -385,7 +381,7 @@ def start_match():
 
     print '================================================'
     print 'Overall score X: ' +str(overall_score_x)
-    print 'Overall score zero: ' + str(overall_score_zero)
+    print 'Overall score O: ' + str(overall_score_zero)
     if overall_score_x > overall_score_zero:
        print 'Match winner X'
     elif overall_score_x < overall_score_zero:
