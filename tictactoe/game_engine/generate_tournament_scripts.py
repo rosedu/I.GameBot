@@ -22,8 +22,9 @@ for x in sys.argv[1:]:
                         '/tmp/output_of_game_engine_input_of_player_2 ' + \
                         '/tmp/output_of_player_2_input_of_game_engine ' + \
                         x + ' ' + zero + ' ' + \
-                        '2>/tmp/tictactoe_debug_log.txt'
-            print >> f, 'pkill xterm'
+                        '2>/tmp/tictactoe_debug_log.txt &'
+            print >> f, 'sleep 5'
+            print >> f, 'pkill python'
 
 f.close()
 
